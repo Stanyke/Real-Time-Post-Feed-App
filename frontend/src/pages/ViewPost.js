@@ -7,7 +7,7 @@ import WaitForPageLoad from "../components/WaitForPageLoad";
 import Header from "../components/Header";
 import TextareaAutosize from "@mui/material/TextareaAutosize";
 import useApp from "../store/contexts/AppContext";
-import Modal from "@mui/material/Modal";
+import { Modal } from "react-bootstrap";
 import Comment from "../components/Comment";
 
 const styles = {
@@ -306,39 +306,39 @@ export default function ViewPost(props) {
           </Paper>
 
           <Modal
-            open={openEditCommentModel}
-            onClose={() => handleCommentEdit({}, false)}
-            aria-labelledby="modal-modal-title"
-            aria-describedby="modal-modal-description"
+            show={openEditCommentModel}
+            onHide={() => handleCommentEdit({}, false)}
+            size="lg"
+            aria-labelledby="contained-modal-title-vcenter"
+            centered
           >
-            <Box sx={style}>
-              <Typography id="modal-modal-title" variant="h5">
+            <Modal.Header closeButton>
+              <Modal.Title id="contained-modal-title-vcenter">
                 Edit Comment
-              </Typography>
-
+              </Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
               <Box id="modal-modal-description" style={{ width: "auto" }}>
                 <form
                   onSubmit={submitEditedPostComment}
                   noValidate
                   autoComplete="off"
                 >
-                  <Box style={{ width: "400px" }}>
-                    <FormControl margin="normal" style={{ width: "400px" }}>
-                      <TextareaAutosize
+                  <Box style={{ width: "100%" }}>
+                    <FormControl margin="normal" style={{ width: "100%" }}>
+                      <textarea
                         placeholder="Description"
                         name="description"
                         style={{
-                          width: 400,
                           borderBottom: "1px solid",
                           outline: "none",
                           fontSize: "15px",
                           fontWeight: "normal",
-                          maxWidth: 400,
-                          minWidth: 400,
                           minHeight: 15,
                           maxHeight: 150,
                           height: 80,
                           overflow: "auto",
+                          padding: 10
                         }}
                         value={newValueOfSelectedComment}
                         onChange={(e) =>
@@ -355,43 +355,44 @@ export default function ViewPost(props) {
                   </Box>
                 </form>
               </Box>
-            </Box>
+            </Modal.Body>
           </Modal>
 
-          <Modal
-            open={openReplyCommentModel}
-            onClose={() => handleCommentReply({}, false)}
-            aria-labelledby="modal-modal-title"
-            aria-describedby="modal-modal-description"
-          >
-            <Box sx={style}>
-              <Typography id="modal-modal-title" variant="h5">
-                Reply Comment
-              </Typography>
 
-              <Box id="modal-modal-description" style={{ width: "auto" }}>
+          <Modal
+            show={openReplyCommentModel}
+            onHide={() => handleCommentReply({}, false)}
+            size="lg"
+            aria-labelledby="contained-modal-title-vcenter"
+            centered
+          >
+            <Modal.Header closeButton>
+              <Modal.Title id="contained-modal-title-vcenter">
+              Reply Comment
+              </Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+            <Box id="modal-modal-description" style={{ width: "auto" }}>
                 <form
                   onSubmit={submitRepliedPostComment}
                   noValidate
                   autoComplete="off"
                 >
-                  <Box style={{ width: "400px" }}>
-                    <FormControl margin="normal" style={{ width: "400px" }}>
-                      <TextareaAutosize
+                  <Box style={{ width: "100%" }}>
+                    <FormControl margin="normal" style={{ width: "100%" }}>
+                      <textarea
                         placeholder="Reply comment..."
                         name="comment"
                         style={{
-                          width: 400,
                           borderBottom: "1px solid",
                           outline: "none",
                           fontSize: "15px",
                           fontWeight: "normal",
-                          maxWidth: 400,
-                          minWidth: 400,
                           minHeight: 15,
                           maxHeight: 150,
                           height: 80,
                           overflow: "auto",
+                          padding: 10
                         }}
                         value={newCommentToReply}
                         onChange={(e) => setNewCommentToReply(e.target.value)}
@@ -406,8 +407,9 @@ export default function ViewPost(props) {
                   </Box>
                 </form>
               </Box>
-            </Box>
+            </Modal.Body>
           </Modal>
+          
         </Box>
       </>
     );

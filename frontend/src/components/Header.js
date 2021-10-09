@@ -11,8 +11,7 @@ import MoreIcon from "@material-ui/icons/MoreVert";
 
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import TextareaAutosize from '@mui/material/TextareaAutosize';
-import Modal from "@mui/material/Modal";
+import { Modal } from "react-bootstrap";
 
 import { Grid, FormControl, TextField } from "@material-ui/core";
 
@@ -86,24 +85,37 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  maxWidth: 400,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: 4,
+  container: {
+    position: "relative",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    maxWidth: 400,
+    bgcolor: "background.paper",
+    border: "2px solid #000",
+    boxShadow: 24,
+    p: 4,
+
+    "@media (max-width: 400px)": {
+      maxWidth: "70%",
+    },
+  },
+  innerContainer: {
+    width: "100%",
+  },
 };
 
 export default function Header(props) {
   const { user } = props;
-  const { appState: { username }, removeUsername, submitPost } = useApp();
+  const {
+    appState: { username },
+    removeUsername,
+    submitPost,
+  } = useApp();
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const [postSubject, setPostSubject] = React.useState('');
-  const [postDescription, setPostDescription] = React.useState('');
+  const [postSubject, setPostSubject] = React.useState("");
+  const [postDescription, setPostDescription] = React.useState("");
   const { REACT_APP_AFTER_LOGIN_REDIRECT_URL, REACT_APP_PLATFORM_NAME } =
     process.env;
 
@@ -127,11 +139,16 @@ export default function Header(props) {
 
   const handlePostSubmission = async (event) => {
     event.preventDefault();
-    const data = {subject: postSubject, description: postDescription, username};
+    const data = {
+      subject: postSubject,
+      description: postDescription,
+      username,
+    };
     await submitPost(data);
-    setPostSubject('');
-    setPostDescription('');
-  }
+    setPostSubject("");
+    setPostDescription("");
+    handleClose();
+  };
 
   const menuId = "primary-search-account-menu";
   const renderMenu = (
@@ -203,27 +220,22 @@ export default function Header(props) {
       {renderMenu}
 
       <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
+        show={open}
+        onHide={handleClose}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
       >
-        <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h5">
+        <Modal.Header closeButton>
+          <Modal.Title id="contained-modal-title-vcenter">
             Add A New Post
-          </Typography>
-
-          <Box
-            id="modal-modal-description"
-            style={{ width: "auto" }}
-          >
-            <form
-              onSubmit={handlePostSubmission}
-              noValidate
-              autoComplete="off"
-            >
-              <Box style={{ width: "400px" }}>
-                <FormControl margin="normal" style={{ width: "400px" }}>
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Box id="modal-modal-description" style={{ width: "auto" }}>
+            <form onSubmit={handlePostSubmission} noValidate autoComplete="off">
+              <Box style={style.innerContainer}>
+                <FormControl margin="normal" style={style.innerContainer}>
                   <TextField
                     aria-label="subject"
                     label="Subject"
@@ -235,29 +247,34 @@ export default function Header(props) {
                   />
                 </FormControl>
 
-                <FormControl margin="normal" style={{ width: "400px" }}>
-                  <TextareaAutosize
+                <FormControl margin="normal" style={style.innerContainer}>
+                  <textarea
                     placeholder="Description"
                     name="description"
-                    style={{ width: 400, borderBottom: "1px solid", outline: "none", fontSize: "15px", fontWeight: "normal", maxWidth: 400, minWidth: 400, minHeight: 15, maxHeight: 150, height: 80}}
+                    style={{
+                      borderBottom: "1px solid",
+                      outline: "none",
+                      fontSize: "15px",
+                      fontWeight: "normal",
+                      minHeight: 15,
+                      maxHeight: 150,
+                      height: 80,
+                      padding: 10
+                    }}
                     value={postDescription}
                     onChange={(e) => setPostDescription(e.target.value)}
                     required
                   />
                 </FormControl>
                 <Grid>
-                  <Button
-                    type="submit"
-                    variant="contained"
-                    size="large"
-                  >
+                  <Button type="submit" variant="contained" size="large">
                     Submit
                   </Button>
                 </Grid>
               </Box>
             </form>
           </Box>
-        </Box>
+        </Modal.Body>
       </Modal>
     </div>
   );
