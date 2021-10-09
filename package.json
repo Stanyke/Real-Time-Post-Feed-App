@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "client": "cd frontend && npm start",
-    "server": "cd backend && nodemon server.js",
+    "server": "cd backend && nodemon index.js",
     "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
-    "start": "cd backend && node server.js",
+    "start": "cd backend && node index.js",
     "heroku-postbuild": "cd frontend && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
   },
   "repository": {
