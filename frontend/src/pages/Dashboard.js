@@ -3,6 +3,7 @@ import {
   Box,
   makeStyles,
 } from "@material-ui/core";
+import Paper from '@mui/material/Paper';
 import { useHistory } from "react-router-dom";
 import WaitForPageLoad from "../components/WaitForPageLoad";
 import Header from "../components/Header";
@@ -35,7 +36,11 @@ export default function Dashboard() {
         <Header user={username} />
         <Box className={classes.root}>
           <Box className="container">
-            <CustomizedTables />
+            {Object.values(posts).length ? <CustomizedTables /> : 
+            <Paper>
+              <b>No Posts Available</b>
+            </Paper>
+            }
           </Box>
         </Box>
       </>
