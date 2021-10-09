@@ -272,19 +272,17 @@ export default function ViewPost(props) {
                 noValidate
                 autoComplete="off"
               >
-                <Box style={{ width: "400px", marginTop: "50px" }}>
-                  <FormControl margin="normal" style={{ width: "400px" }}>
+                <Box style={{ width: "100%", marginTop: "50px" }}>
+                  <FormControl margin="normal" style={{ width: "100%" }}>
                     <TextareaAutosize
                       placeholder="Write your comment..."
                       name="comment"
                       style={{
-                        width: 400,
                         borderBottom: "1px solid",
                         outline: "none",
                         fontSize: "15px",
                         fontWeight: "normal",
-                        maxWidth: 400,
-                        minWidth: 400,
+                        maxWidth: 500,
                         minHeight: 15,
                         maxHeight: 150,
                         height: 80,
