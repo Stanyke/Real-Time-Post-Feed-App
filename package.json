@@ -1,0 +1,30 @@
+{
+  "name": "real-time-chat-app-using-node.js-react.js-socket.js-webtrc",
+  "version": "1.0.0",
+  "description": "Real Time Chat App Using Node.js, React.js, Socket.js &amp; WebTRC, With Support Of Video And Audio Call, Translator And More.",
+  "main": "index.js",
+  "scripts": {
+    "client": "cd frontend && npm start",
+    "server": "cd backend && nodemon server.js",
+    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
+    "start": "cd backend && node server.js",
+    "heroku-postbuild": "cd frontend && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Stanyke/Real-Time-Chat-App-Using-Node.js-React.js-Socket.js-WebTRC.git"
+  },
+  "author": "Stanley Chibuike",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Stanyke/Real-Time-Chat-App-Using-Node.js-React.js-Socket.js-WebTRC/issues"
+  },
+  "homepage": "https://github.com/Stanyke/Real-Time-Chat-App-Using-Node.js-React.js-Socket.js-WebTRC#readme",
+  "dependencies": {
+    "concurrently": "^6.2.1",
+    "cors": "^2.8.5",
+    "mongoose": "^6.0.9",
+    "nodemon": "^2.0.12",
+    "socket.io": "^4.2.0"
+  }
+}
