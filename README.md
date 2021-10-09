@@ -32,7 +32,7 @@ They are the following:
 - REACT_APP_SERVER_URL = --Replace with backend url-- e.g http://localhost:5000 or live url
 - REACT_APP_AFTER_LOGIN_REDIRECT_URL = /dashboard
 - REACT_APP_BEFORE_LOGIN_REDIRECT_URL = /
-- REACT_APP_PLATFORM_NAME = --Replace with any name you would want to give this app-- e.g Real Time Post App 
+- REACT_APP_PLATFORM_NAME = --Replace with any name you would want to give this app-- e.g Real Time Post Feed App 
 - REACT_APP_VIEW_POST_URL = view-post
 
     - Note the other should be set like this, if in case you change them, refer to the code on the frontend directory to adjust the component or pages names.
