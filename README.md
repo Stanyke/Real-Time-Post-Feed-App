@@ -37,4 +37,6 @@ They are the following:
 
     - Note the other should be set like this, if in case you change them, refer to the code on the frontend directory to adjust the component or pages names.
 
+- On the homepage(login), use any username you wish to access the platform
+
 # Thank you
